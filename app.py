@@ -10,7 +10,7 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     content = db.Column(db.String(200), nullable = False)
     date_created = db.Column(db.DateTime, default = datetime.utcnow)
-    #date_deadline = db.Column(db.DateTime)
+    date_deadline = db.Column(db.DateTime)
 
     def __repr__(self):
         return "<Task %r>" % self.id
@@ -23,11 +23,12 @@ def index():
     if request.method == "POST":
         task_content = request.form["content"]
         new_task = Todo(content=task_content)
-        #tobe_deadline = request.form["date_deadline"]
-        #new_task = Todo(content=task_content, date_deadline=tobe_deadline)
+        tobe_deadline = request.form["date_deadline"]
+        gonebe_deadline = datetime.strptime(tobe_deadline, "%Y-%m-%d") 
+        new_deadline = Todo(date_deadline=gonebe_deadline,content=task_content)
 
         try:
-            db.session.add(new_task)
+            db.session.add(new_deadline, new_task) #new_task, bunu kaldırınca niye tarih çalışıyor???
             #db.session.add(new_deadline)
             db.session.commit()
             return redirect("/")
@@ -55,7 +56,7 @@ def update(id):
     task = Todo.query.get_or_404(id)
     if request.method == "POST":
         task.content = request.form["content"]
-        task.date_deadline = request.form["date_deadline"]
+        #task.date_deadline = request.form["date_deadline"]
 
         try:
             db.session.commit()

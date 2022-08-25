@@ -21,7 +21,7 @@
             <tr>
                 <td>{{ task.content }}</td>
                 <td>{{ task.date_created.date() }}</td>
-                <td>{{ "" }}</td>
+                <td>{{ task.date_deadline }}</td>
                 <td>
                     <a href="/delete/{{task.id}}">Sil</a>
                     <br>
@@ -34,8 +34,8 @@
      <form action="/" method="POST">
         <input type="text" name="content" id="content">
         <input type="submit" value="İş Ekle">    
-        <!-- <input type="date" name="date_deadline" id="content">
-        <input type="submit" value="Ne Zamana?"> -->
+        <input type="date" name="date_deadline" id="content"> 
+        <input type="submit" value="Ne Zamana?"> 
      </form>
 </div>
 {% endblock %}
