@@ -56,7 +56,8 @@ def update(id):
     task = Todo.query.get_or_404(id)
     if request.method == "POST":
         task.content = request.form["content"]
-        #task.date_deadline = request.form["date_deadline"]
+        date_dl = datetime.strptime(request.form["date_deadline"], "%Y-%m-%d")
+        task.date_deadline = date_dl  
 
         try:
             db.session.commit()
