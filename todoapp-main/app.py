@@ -35,7 +35,7 @@ def index():
          #flash('Record was successfully added')
          return redirect('/')
          
-    tasks = Todo.query.order_by(Todo.date_created).all()
+    tasks = Todo.query.order_by(Todo.date_deadline).all()
     return render_template('index.html', tasks = tasks)
 
 
